@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.11
+    working_directory: /go/src/github.com/mentat/terraform-provider-conjur
+    steps:
+      - checkout
+      - run: go get -v -t -d ./...
+      - run: mkdir -p workspace
+      - run: go build -o workspace/terraform-provider-conjur
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - terraform-provider-conjur
