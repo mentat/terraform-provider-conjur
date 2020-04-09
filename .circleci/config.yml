@@ -14,7 +14,7 @@ jobs:
       - run: go build -o /tmp/terraform-provider-conjur
       - store_artifacts:
           path: /tmp/terraform-provider-conjur
-  build2:
+  build-windows:
     executor:
       name: win/default 
       size: "medium"
@@ -25,3 +25,9 @@ jobs:
          shell: bash.exe
       - store_artifacts:
           path: /tmp/terraform-provider-conjur-windows
+workflows:
+ version: 2
+ build_all:
+   jobs:
+     - build
+     - build-windows
