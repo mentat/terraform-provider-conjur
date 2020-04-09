@@ -11,8 +11,14 @@ jobs:
     steps:
       - checkout
       - run: go get -v -t -d ./...
-      - run: GOARCH=amd64 go build -o /tmp/terraform-provider-conjur-linux
-      - run: GOOS=darwin GOARCH=amd64 go build go build -o /tmp/terraform-provider-conjur-darwin
+      - run: 
+          name: "Setup env for AMD64"
+          command: echo 'export GOARCH="amd64"' >> $BASH_ENV
+      - run:  go build -o /tmp/terraform-provider-conjur-linux
+      - run: 
+          name: "Setup cross-compile for MacOS"
+          command: echo 'export GOOS="darwin"' >> $BASH_ENV
+      - run: go build go build -o /tmp/terraform-provider-conjur-darwin
       - store_artifacts:
           path: /tmp/terraform-provider-conjur-linux
           path: /tmp/terraform-provider-conjur-darwin
