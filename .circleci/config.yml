@@ -11,9 +11,11 @@ jobs:
     steps:
       - checkout
       - run: go get -v -t -d ./...
-      - run: go build -o /tmp/terraform-provider-conjur
+      - run: GOARCH=amd64 go build -o /tmp/terraform-provider-conjur-linux
+      - run: GOOS=darwin GOARCH=amd64 go build go build -o /tmp/terraform-provider-conjur-darwin
       - store_artifacts:
-          path: /tmp/terraform-provider-conjur
+          path: /tmp/terraform-provider-conjur-linux
+          path: /tmp/terraform-provider-conjur-darwin
   build-windows:
     executor:
       name: win/default 
@@ -21,7 +23,7 @@ jobs:
     steps:
       - checkout
       - run:
-         command: go build -o /tmp/terraform-provider-conjur
+         command: go build -o /tmp/terraform-provider-conjur-windows
          shell: bash.exe
       - store_artifacts:
           path: /tmp/terraform-provider-conjur-windows
