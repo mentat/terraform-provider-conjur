@@ -10,7 +10,6 @@ jobs:
     working_directory: /go/src/github.com/mentat/terraform-provider-conjur
     steps:
       - checkout
-      - run: go get -v -t -d ./...
       - run: 
           name: "Setup env for AMD64"
           command: echo 'export GOARCH="amd64"' >> $BASH_ENV
@@ -18,7 +17,7 @@ jobs:
       - run: 
           name: "Setup cross-compile for MacOS"
           command: echo 'export GOOS="darwin"' >> $BASH_ENV
-      - run: go build go build -o /tmp/terraform-provider-conjur-darwin
+      - run: go build -o /tmp/terraform-provider-conjur-darwin
       - store_artifacts:
           path: /tmp/terraform-provider-conjur-linux
           destination: terraform-provider-conjur-linux
