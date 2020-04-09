@@ -19,7 +19,6 @@ jobs:
       name: win/default 
       size: "medium"
     steps:
-      # Commands are run in a Windows virtual machine environment
       - checkout
       - run: go build -o /tmp/terraform-provider-conjur-windows
         shell: bash.exe
