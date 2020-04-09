@@ -20,8 +20,8 @@ jobs:
       size: "medium"
     steps:
       - checkout
-      - run: 
-        command: go build -o /tmp/terraform-provider-conjur-windows
-        shell: bash.exe
+      - run:
+         command: echo hello && echo world
+         shell: bash.exe
       - store_artifacts:
           path: /tmp/terraform-provider-conjur-windows
