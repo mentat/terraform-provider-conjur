@@ -32,7 +32,10 @@ jobs:
       - checkout
       - run:
          command: go build -o c:\tmp\terraform-provider-conjur-windows
-         shell: bash.exe
+         shell: bash --login -eo pipefail
+      - run:
+         command: ls c:\tmp\
+         shell: bash --login -eo pipefail
       - store_artifacts:
           path: c:\tmp\terraform-provider-conjur-windows
           destination: terraform-provider-conjur-windows
