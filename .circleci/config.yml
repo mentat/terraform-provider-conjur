@@ -31,10 +31,10 @@ jobs:
     steps:
       - checkout
       - run:
-         command: go build -o /tmp/terraform-provider-conjur-windows
+         command: go build -o c:\tmp\terraform-provider-conjur-windows
          shell: bash.exe
       - store_artifacts:
-          path: /tmp/terraform-provider-conjur-windows
+          path: c:\tmp\terraform-provider-conjur-windows
           destination: terraform-provider-conjur-windows
 workflows:
  version: 2
